@@ -4,7 +4,6 @@ A full-stack MERN application for doctor-patient scheduling, live video consulta
 e-prescription management, and medical history tracking.
 
 ## Tech Stack
-
 - **MongoDB** — data storage (users, appointments, prescriptions, medical records)
 - **Express.js** — REST API
 - **React** — SPA frontend (React Router, Context API)
@@ -12,7 +11,6 @@ e-prescription management, and medical history tracking.
 - **Socket.io + WebRTC** — real-time peer-to-peer video consultations & in-call chat
 
 ## Features
-
 - **Auth & security**: JWT auth, bcrypt password hashing (cost 12), account lockout after
   5 failed logins, rate-limited login endpoint, XSS sanitization, Helmet security headers,
   role-based access control (patient / doctor / admin), password-change token invalidation.
@@ -28,7 +26,6 @@ e-prescription management, and medical history tracking.
   and notes against a patient's timeline; patients have read-only access to their own record.
 
 ## Project Structure
-
 ```
 telemedicine-app/
 ├── server/              Express API
@@ -52,35 +49,29 @@ telemedicine-app/
 ## Setup
 
 ### Prerequisites
-
 - Node.js 18+
 - MongoDB running locally or a connection string (e.g. MongoDB Atlas)
 
 ### 1. Backend
-
 ```bash
 cd server
 cp .env.example .env      # then edit MONGO_URI / JWT_SECRET as needed
 npm install
 npm run dev                # nodemon, or `npm start` for production
 ```
-
 The API runs on `http://localhost:5000` by default.
 
 ### 2. Frontend
-
 ```bash
 cd client
 npm install
 npm start
 ```
-
 The app runs on `http://localhost:3000` and expects the API at
 `http://localhost:5000/api` (override with `REACT_APP_API_URL` and
 `REACT_APP_SOCKET_URL` env vars if deploying separately).
 
 ## Trying it out
-
 1. Register one account as a **doctor** and one as a **patient** (use two browsers or
    incognito windows).
 2. As the doctor, go to **My Availability** and add a weekly time window.
@@ -92,7 +83,6 @@ The app runs on `http://localhost:3000` and expects the API at
    **prescription**, and log a **medical record** entry for the patient.
 
 ## Security Notes (for demonstration/discussion)
-
 - Passwords are never returned in API responses (`toJSON` strips them).
 - Login uses a generic "invalid email or password" message to prevent user enumeration.
 - Booking conflicts are re-checked server-side immediately before insert to close the

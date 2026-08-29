@@ -63,6 +63,17 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
 app.use("/api/medical-records", medicalRecordRoutes);
 
+// If a client build exists, serve it (single-service deployment option)
+const path = require('path');
+const fs = require('fs');
+const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
+
+if (process.env.NODE_ENV === 'production' && fs.existsSync(clientBuildPath)) {
+  app.use(express.static(clientBuildPath));
+  // Let React Router handle client-side routes
+  app.get('*', (req, res) => res.sendFile(path.join(clientBuildPath, 'index.html')));
+}
+
 app.use(notFound);
 app.use(errorHandler);
 
